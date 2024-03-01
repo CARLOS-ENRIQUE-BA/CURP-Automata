@@ -1,31 +1,21 @@
-// Expresión regular numero #2
+// Expresión regular numero #3
 function esValida(cadena) {
-    if (cadena.length !== 4) {
+    if (cadena.length > 4) {
         return false;
     }
 
-    if (cadena[0] !== 'R' && cadena[0] !== 'r') {
+    if (cadena[0] !== 'B' && cadena[0] !== 'b') {
         return false;
     }
-
-    let oCount = 0;
-    let mCount = 0;
-    let nCount = 0;
 
     for (let i = 1; i < cadena.length; i++) {
         const caracter = cadena[i].toLowerCase();
-        if (caracter === 'o') {
-            oCount++;
-        } else if (caracter === 'm') {
-            mCount++;
-        } else if (caracter === 'n') {
-            nCount++;
-        } else {
+        if (caracter !== 'a' && caracter !== 'a' && caracter !== 'c') {
             return false;
         }
     }
 
-    return oCount === 1 && mCount === 1 && nCount === 1;
+    return true;
 }
 
 function generarAutomata() {

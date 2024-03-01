@@ -1,14 +1,25 @@
-// Expresión regular numero #1
 function esValida(cadena) {
     let estadoActual = 'q0';
     const transiciones = {
-        'q0': {'r': 'q1', 'R': 'q1'},
-        'q1': {'o': 'q2', 'O': 'q2', 'r': 'qe', 'R': 'qe'},
-        'q2': {'m': 'q3', 'M': 'q3', 'o': 'qe', 'O': 'qe'},
-        'q3': {'n': 'q4', 'N': 'q4', 'm': 'qe', 'M': 'qe'},
+        'q0': {'b': 'q1', 'B': 'q1'},
+        'q1': {'a': 'q2', 'A': 'q2', 'b': 'q1', 'B': 'q1', 'c': 'qe', 'C': 'qe'},
+        'q2': {'a': 'q3', 'A': 'q3', 'b': 'q1', 'B': 'q1', 'c': 'qe', 'C': 'qe'},
+        'q3': {'c': 'q4', 'C': 'q4', 'a': 'q2', 'A': 'q2', 'b': 'q1', 'B': 'q1'},
         'q4': {},
         'qe': {}
     };
+    
+    let count = 1;
+    for (let i = 1; i < cadena.length; i++) {
+        if (cadena[i] === cadena[i-1]) {
+            count++;
+        } else {
+            count = 1;
+        }
+        if (count > 2) {
+            return false;
+        }
+    }
 
     for (let i = 0; i < cadena.length; i++) {
         const caracter = cadena[i];
@@ -20,7 +31,7 @@ function esValida(cadena) {
     }
 
     const estadosFinales = {'q1': true, 'q2': true, 'q3': true, 'q4': true};
-    return !!estadosFinales[estadoActual];
+    return !!estadosFinales[estadoActual] && cadena.length >= 4 && cadena.length <= 4;
 }
 
 function generarAutomata() {
